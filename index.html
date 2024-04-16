@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 引入 Bootstrap 5.3 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <!-- 引入 Bootstrap 5.3 Bundle (包括 Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <title>校園行事曆</title>
+  <style>
+    .btn-check:active+.btn-light,
+    .btn-check:checked+.btn-light,
+    .btn-light.active,
+    .btn-light:active,
+    .show>.btn-light.dropdown-toggle {
+      color: #fff;
+      background-color: #888888;
+      border-color: #888888;
+    }
+
+    #showCalendariframe,
+    #showRainbowCalendariframe,
+    #showKindergartenCalendariframe {
+      zoom: 1.5;
+      -ms-zoom: 1.5;
+      -moz-transform: scale(1.5);
+      -moz-transform-origin: 0 0;
+      -moz-transform: scale(1.5);
+      -moz-transform-origin: 0 0;
+      -o-transform: scale(1.5);
+      -o-transform-origin: 0 0;
+      -webkit-transform: scale(1.5);
+      -webkit-transform-origin: 0 0;
+    }
+
+    .responsive-iframe-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      padding-top: 30px;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .responsive-iframe-container iframe,
+    .vresponsive-iframe-container object,
+    .vresponsive-iframe-container embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 確保整頁背景透明 */
+    html,
+    body {
+      background: transparent;
+      padding: 3px;
+    }
+
+    .carousel-inner {
+      background: transparent !important;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel-item {
+      background: transparent !important;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+    }
+
+    .carousel-item:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: calc(100vw * 3 / 4);
+      /* 根據寬度計算高度，這裡假設容器寬度為100vw */
+      border-radius: 15px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .carousel-caption {
+      text-shadow: 0px 0px 8px rgba(0, 0, 0, 1);
+      color: #fff;
+    }
+
+    h3,
+    p {
+      font-weight: 900;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      background-image: none !important;
+      background-color: transparent !important;
+    }
+
+    /* 顯示 Carousel 的指示器 */
+    .carousel-indicators {
+      display: flex !important;
+    }
+
+    .carousel-indicators button {
+      width: 20px;
+      /* 指示器的寬度 */
+      height: 20px;
+      /* 指示器的高度 */
+      border-radius: 15px;
+      border: 5px solid #fff !important;
+      /* 指示器邊框 */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+      /* 添加陰影效果 */
+      background-color: rgba(0, 0, 0, 0);
+      /* 透明背景 */
+      margin: 0 5px;
+      /* 間距 */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Carousel 滑動圖片 -->
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <!-- Carousel 指示器 -->
+    <div class="carousel-indicators"></div>
+    <!-- 輪播圖片 -->
+    <div class="carousel-inner">
+      <!-- 預先填充的第一張圖片 https://media.giphy.com/media/hWZBZjMMuMl7sWe0x8/giphy.gif-->
+      <div class="carousel-item active">
+        <img src="https://i.imgur.com/299tBLs.gif" alt="First slide">
+        <div class="carousel-caption"></div>
+      </div>
+    </div>
+    <!-- 左右控制箭頭 -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <a class="weatherwidget-io" href="https://forecast7.com/zh-tw/24d15120d67/taichung-city/"
+    data-font="微軟正黑體 (Microsoft JhengHei)" data-icons="Climacons Animated" data-mode="Forecast" data-days="5"
+    data-theme="pure" data-accent="">Taichung, Taiwan</a>
+  <div class="container-fluid h-100">
+    <div id="showCalendarDiv">
+      <iframe id="showRainbowCalendariframe"
+        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTaipei&showTitle=0&showNav=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&src=Y19taDllOGc3azY0Y3Jwc25nOXJvdnR2OXRuc0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=emgtdHcudGFpd2FuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23AD1457&color=%230B8043"
+        style="border:solid 0px #777" width="68%" height="800" frameborder="0" scrolling="no">
+      </iframe>
+    </div>
+  </div>
+  <script>
+    ! function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://weatherwidget.io/js/widget.min.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }
+    }(document, 'script', 'weatherwidget-io-js');
+    document.addEventListener('DOMContentLoaded', function() {
+            fetchCarouselData('安親校');
+        });
+
+        function fetchCarouselData(category) {
+            var url = 'https://script.google.com/macros/s/AKfycbzguaMJRJOmuLEhM3b_4r7iQ0JKpWHB341iExQLfq607bGKZE3T1BdUvCemfhu60taH7A/exec';
+            url += '?category=' + encodeURIComponent(category);
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    updateCarousel(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data: ', error);
+                });
+        }
+
+        function updateCarousel(data) {
+            var carouselInner = document.querySelector('.carousel-inner');
+            var carouselIndicators = document.querySelector('.carousel-indicators');
+            carouselInner.innerHTML = '';
+            carouselIndicators.innerHTML = '';
+
+            data.forEach((item, index) => {
+                var carouselItem = document.createElement('div');
+                carouselItem.className = 'carousel-item' + (index === 0 ? ' active' : '');
+                carouselItem.innerHTML = `
+                    <a href="${item['文章連結']}">
+                        <img src="${item['圖片連結']}" alt="${item['標題']}">
+                        <div class="carousel-caption">
+                            <h3>${item['標題']}</h3>
+                            <p>${item['副標題']}</p>
+                        </div>
+                    </a>
+                `;
+                carouselInner.appendChild(carouselItem);
+
+                var indicator = document.createElement('button');
+                indicator.setAttribute('type', 'button');
+                indicator.setAttribute('data-bs-target', '#myCarousel');
+                indicator.setAttribute('data-bs-slide-to', index);
+                indicator.className = index === 0 ? 'active' : '';
+                indicator.setAttribute('aria-current', index === 0 ? 'true' : 'false');
+                indicator.setAttribute('aria-label', `Slide ${index + 1}`);
+                carouselIndicators.appendChild(indicator);
+            });
+        }
+  </script>
+</body>
+
+</html>
