@@ -196,15 +196,24 @@
             data.forEach((item, index) => {
                 var carouselItem = document.createElement('div');
                 carouselItem.className = 'carousel-item' + (index === 0 ? ' active' : '');
-                carouselItem.innerHTML = `
-                    <a href="${item['文章連結']}">
+                if (item['文章連結'] == ''){
+                    carouselItem.innerHTML = `
                         <img src="${item['圖片連結']}" alt="${item['標題']}">
                         <div class="carousel-caption">
                             <h3>${item['標題']}</h3>
                             <p>${item['副標題']}</p>
-                        </div>
-                    </a>
-                `;
+                        </div>`;
+                }
+                else{
+                    carouselItem.innerHTML = `
+                        <a href="${item['文章連結']}">
+                            <img src="${item['圖片連結']}" alt="${item['標題']}">
+                            <div class="carousel-caption">
+                                <h3>${item['標題']}</h3>
+                                <p>${item['副標題']}</p>
+                            </div>
+                        </a>`;
+                }
                 carouselInner.appendChild(carouselItem);
 
                 var indicator = document.createElement('button');
