@@ -80,7 +80,7 @@
 
     .carousel-item img {
       width: 100%;
-      height: calc(100vw * 3 / 4);
+      height: calc(90vw * 3 / 4);
       /* 根據寬度計算高度，這裡假設容器寬度為100vw */
       border-radius: 15px;
       object-fit: cover;
@@ -127,8 +127,9 @@
 </head>
 
 <body>
+  <h1 class="mt-2 mb-1 px-2"><b>最新消息</b></h1>
   <!-- Carousel 滑動圖片 -->
-  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div id="myCarousel" class="carousel slide px-1 py-2" data-bs-ride="carousel">
     <!-- Carousel 指示器 -->
     <div class="carousel-indicators"></div>
     <!-- 輪播圖片 -->
@@ -149,14 +150,14 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <a class="weatherwidget-io" href="https://forecast7.com/zh-tw/24d15120d67/taichung-city/"
+  <!-- <a class="weatherwidget-io" href="https://forecast7.com/zh-tw/24d15120d67/taichung-city/"
     data-font="微軟正黑體 (Microsoft JhengHei)" data-icons="Climacons Animated" data-mode="Forecast" data-days="5"
-    data-theme="pure" data-accent="">Taichung, Taiwan</a>
+    data-theme="pure" data-accent="">Taichung, Taiwan</a> -->
   <div class="container-fluid h-100">
     <div id="showCalendarDiv">
       <iframe id="showRainbowCalendariframe"
         src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTaipei&showTitle=0&showNav=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&src=Y19taDllOGc3azY0Y3Jwc25nOXJvdnR2OXRuc0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=emgtdHcudGFpd2FuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23AD1457&color=%230B8043"
-        style="border:solid 0px #777" width="68%" height="800" frameborder="0" scrolling="no">
+        style="border:solid 0px #777" width="68%" height="240" frameborder="0" scrolling="no">
       </iframe>
     </div>
   </div>
