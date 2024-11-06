@@ -23,15 +23,15 @@
     #showCalendariframe,
     #showRainbowCalendariframe,
     #showKindergartenCalendariframe {
-      zoom: 1.5;
-      -ms-zoom: 1.5;
-      -moz-transform: scale(1.5);
+      zoom: 1.0;
+      -ms-zoom: 1.0;
+      -moz-transform: scale(1.05);
       -moz-transform-origin: 0 0;
-      -moz-transform: scale(1.5);
+      -moz-transform: scale(1.0);
       -moz-transform-origin: 0 0;
-      -o-transform: scale(1.5);
+      -o-transform: scale(1.0);
       -o-transform-origin: 0 0;
-      -webkit-transform: scale(1.5);
+      -webkit-transform: scale(1.0);
       -webkit-transform-origin: 0 0;
     }
 
@@ -60,10 +60,11 @@
       padding: 3px;
     }
 
+    /* Carousel 相關樣式 */
     .carousel-inner {
-      background: transparent !important;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        background: transparent !important;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     }
 
     .carousel-item {
@@ -123,6 +124,37 @@
       margin: 0 5px;
       /* 間距 */
     }
+
+    /* 修改容器樣式 */
+    .container-fluid {
+        padding: 0;
+        margin-top: 10px;
+        /* 計算容器高度：視窗高度減去輪播圖高度和額外間距 */
+        height: calc(100vh - var(--carousel-height) - 20px);
+    }
+
+    /* 日曆容器樣式 - 自適應高度計算 */
+    #showCalendarDiv {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Google 日曆 iframe 樣式 */
+    #showRainbowCalendariframe {
+        width: 95% !important;  /* 寬度設為容器的95% */
+        height: 100% !important;
+        border: none;
+        border-radius: 15px;  /* 圓角效果 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* 陰影效果 */
+        transition: box-shadow 0.3s ease;  /* 陰影過渡動畫 */
+    }
+
+    /* iframe 懸停效果 - 加深陰影 */
+    #showRainbowCalendariframe:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
   </style>
 </head>
 
@@ -152,11 +184,11 @@
   <!-- <a class="weatherwidget-io" href="https://forecast7.com/zh-tw/24d15120d67/taichung-city/"
     data-font="微軟正黑體 (Microsoft JhengHei)" data-icons="Climacons Animated" data-mode="Forecast" data-days="5"
     data-theme="pure" data-accent="">Taichung, Taiwan</a> -->
-  <div class="container-fluid h-100">
+  <div class="container-fluid">
     <div id="showCalendarDiv">
       <iframe id="showRainbowCalendariframe"
-        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTaipei&showTitle=0&showNav=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&src=Y19taDllOGc3azY0Y3Jwc25nOXJvdnR2OXRuc0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=emgtdHcudGFpd2FuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23AD1457&color=%230B8043"
-        style="border:solid 0px #777" width="68%" height="180" frameborder="0" scrolling="no">
+        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTaipei&showTitle=0&showNav=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&src=Y19taDllOGc3azY0Y3Jwc25nOXJvdnR2OXRuc0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=emgtdHcudGFpd2FuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23AD1457&color=%230B8043&showNav=1&showDate=1"
+        frameborder="0" scrolling="no">
       </iframe>
     </div>
   </div>
@@ -226,6 +258,19 @@
                 carouselIndicators.appendChild(indicator);
             });
         }
+
+        // 自動計算並更新 Carousel 高度的函數
+        function updateCarouselHeight() {
+            const carousel = document.getElementById('myCarousel');
+            // 獲取輪播圖實際高度並加上間距
+            const carouselHeight = carousel.offsetHeight + 20;
+            // 設置 CSS 變數以供高度計算使用
+            document.documentElement.style.setProperty('--carousel-height', `${carouselHeight}px`);
+        }
+
+        // 在頁面加載和視窗大小改變時重新計算高度
+        window.addEventListener('load', updateCarouselHeight);
+        window.addEventListener('resize', updateCarouselHeight);
   </script>
 </body>
 
